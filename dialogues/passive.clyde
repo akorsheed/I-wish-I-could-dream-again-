@@ -1,0 +1,25 @@
+--
+-- Passive check example
+--
+You: This is a dialogue line
+You: After this line you will get a passive check
+
+{ match @passive_check_123
+	'repitilian': -> repitilian
+	'inland': -> inland
+	'limbic': -> limbic
+}
+
+This is after the passive check #end
+
+== repitilian
+Ancient Reptilian Brain: Hello!
+<-
+
+== inland
+Inland Empire: Fear and apprehension...
+<-
+
+== limbic
+Limbic System: A fiery streak penetrates your skull
+<-

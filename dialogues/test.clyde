@@ -1,0 +1,23 @@
+--
+-- This is just a test file showing some of clydes feature
+--
+Vini: Hello world!
+
++ This option does nothing
+	Nothing at all!
+	<-
++ This option has some extra lines
+	-> extra lines <-
+* This option you can select only once #red-check
+	You spent it!
+	<-
++ This option ends the dialogue
+	Goodbye! #end
+	
+	
+== extra lines
+Limbic System: Lines!
+Inland Empire: More lines!
+Inland Empire: And even more lines!
+You: I think that's enough.
+<-

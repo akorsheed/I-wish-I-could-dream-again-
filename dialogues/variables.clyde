@@ -1,0 +1,43 @@
+--
+-- Example of dialogue using variables
+--
+
+-- initializing variables
+{ set @dialogue_runs ?= 0 }
+
+-- external variables are set like internal ones, but need to start with a @
+{ set @dialogue_runs += 1 }
+
+
+Encyclopedia:
+	Keep in mind that this project keeps the game data in-memory only.
+	This means it's persisted between dialogue executions, but isn't when restarting this scene.
+	This dialogue demonstrate the use of variables.
+	There are two kinds of variables you can use\: internal and external.
+	Internal variables are kept as part of your internal dialogue data.
+	They are useful for data that is only relevant to a specific dialogue.
+
+{ match has_run_dialogue
+	true:
+		Encyclopedia: For instance, I know you have ran this dialogue before.
+	default:
+		Encyclopedia: This is how I know this is the first time you are executing this dialogue. { set has_run_dialogue }
+}
+
+Encyclopedia:
+	External variables are stored outside the dialogue. They are useful in many scenarios, such as...
+	1. Some data is meant to be shared between dialogue files. e.g a flag, such as "user_chose_brave_option"
+	2. Some data is not owned by the dialogue. e.g A character name, the character HP. It would be a waste persisting this in each dialogue.
+	3. Some data is ephemeral, and only availabe in runtime. e.g real time of the day (is it night? is it morning?), number of enemies in the scene, a power up is active.
+	Using external variables, I know you have run this dialogue this amount of times\: %@dialogue_runs%.
+	By checking the last line in the dialogue's source, you can see how to use an external variable, and also how to use it in your text.
+	Also, using Godot's debugger, you can find this exact number (%@dialogue_runs%) in the persistence property in the game_data object. The variable is called "dialogue_runs".
+
+Encyclopedia: That's all for now. For more details about variables and use-cases, check Clyde's docs at thisisvini.com/clyde
+
+{ match @hour_of_day > 17
+	true: Encyclopedia: Have a good night!
+	false: Encyclopedia: Have a good day!
+}
+
+Encyclopedia: Did you see what I did there? he-he #end

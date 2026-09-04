@@ -1,0 +1,208 @@
+--
+-- Intro dialogue example.
+-- These are the same lines from Disco Elysium's intro scene.
+-- They were extracted and adapted from https://fayde.co.uk/, and
+-- they are here for learning purposes.
+--
+
+Ancient Reptilian Brain:
+	There is nothing. Only warm, primordial blackness.
+	Your conscience ferments in it -- no larger than a single grain of malt.
+	You don't have to do anything anymore.
+Ancient Reptilian Brain: Ever.
+Ancient Reptilian Brain: Never ever.
+
+* You: Never ever ever?
+	Ancient Reptilian Brain: Never ever ever ever, baby!
+	<-
+* You: \(Simply keep on non-existing.)
+	Ancient Reptilian Brain: An inordinate amount of time passes. It is utterly void of struggle.
+		No ex-wives are contained within it.
+	<-
+
+-> intro cont
+
+
+== intro cont
+* You: This is great!
+	Ancient Reptilian Brain: Yes. It. Is.
+	<-
+* You: Gimme some more.
+	-> gimme more
+* You: What was that about the *ex-* something?
+	-> ex <-
+
+
+== gimme more
+Ancient Reptilian Brain: You got it, sweet brother! Nothing upon nothing, upon nothing!
+-> nothing options
+
+
+== nothing options
+* You: I like nothing.
+	Ancient Reptilian Brain: I know you do, baby... I know...
+	<-
+* You: How about you cough up some more of that sweet oblivion?
+	-> cough up
+
+
+== cough up
+Ancient Reptilian Brain: Coming right up, sir. Smooth passage... 
+-> cough up options
+
+
+== cough up options
+* You: Allons-y, let's go!
+	-> allonsy
+* You: I want to get off now, I like pain and burning light and wanting things from people who don't want to give them to me.
+	-> get off
+
+
+== allonsy
+Ancient Reptilian Brain: All right. Nothingtown to Fuck-All-Borough!
+
+* You: A return trip to The Silence please!
+	Ancient Reptilian Brain: Do you want me to upgrade that into a *one way trip*, sir?
+* You: Let's visit the ancient Zero-Holm!
+	Ancient Reptilian Brain: Great choice, elder one. It has always been like this -- and it always will.
+* You: Look, there's *I Am Tired of Being This Type of Animal* and Who-Gives-a-Shit!
+	Ancient Reptilian Brain: Not you! Your days of giving a shit and being that type of animal are over. 
+
+-> allonsy_cont
+
+
+== allonsy_cont
+* You: Don't stop, keep singing. Sing me the song of death.
+	-> song of death
+* You: Wait, no! I need to belittle myself instead.
+	{ set whirlingDreamOneLongRoute }
+	-> get off
+
+
+== song of death
+Ancient Reptilian Brain: The song of death is sweet and endless...
+	But what is this? Somewhere in the sore, bloated *man-meat* around you -- a sensation!
+-> like a fly
+
+
+== get off
+Ancient Reptilian Brain: Do you really? 
+
+* You: Don't be naive, of course not. I want to sail the inky blackness until forever ends!
+	-> dont be naive options
+* You: I do. Let me off.
+	Limbic System: You wouldn't like it if I told you what's back there.
+		Why do you think you had to bludgeon yourself into oblivion?
+		Or did you not sense yourself -- marinating?
+		Poured so much over yourself... Got a bit *carried away* did we, chef?
+	Inland Empire: Fear and apprehension... You should ask what's out there first. { @passive_check_intro_inland_empire }
+
+-> get off cont
+
+
+== get off cont
+* You: Wait, I did this to myself?
+	Limbic System: Yes, you're one disco mother.
+	<-
+* You: Tell me, what's waiting for me?
+	-> ball and apes
+* You: I don't care, I'm an idiot. A brave idiot.
+	-> i dont care
+
+
+== dont be naive options
+{ match whirlingDreamOneLongRoute
+	true:
+		-> song of death
+	default:
+		-> allonsy
+}
+
+
+== i dont care
+Ancient Reptilian Brain: Somewhere in the sore, bloated man-meat around you -- *a sensation*!
+-> like a fly
+
+
+== like a fly
+Ancient Reptilian Brain: Like a fly to the ointment, your conscience sticks to it.
+	The limbed and headed machine of pain and undignified suffering is firing up again.
+	It wants to walk the desert. Hurting. Longing. Dancing to disco music.
+Volition: You can take it, you're a Champion! { @passive_check_intro_volition } { set whirlingDreamOneVolitionChampion }
+
+* You: Mother, help me, there's a head attached to my neck and I'm *in* it.
+	-> stench
+* You: Stop! I don't want to hear anything more about this *sensation*. Take me back to the formless, disembodied nothing! { not whirlingDreamOneBrave }
+	-> stench
+* You: Please, no! I changed my mind! Take me back to the formless, disembodied nothing! { whirlingDreamOneBrave }
+	-> stench
+* You: No, I am not scared, I am a Champion! { whirlingDreamOneVolitionChampion }
+	-> stench
+
+
+== stench
+Limbic System: The stench of liquor rises from your mouth. And with it -- an *un-godly* headache. 
+
+* You: Help! Someone! Cut my head off, it's trying to murder the rest of me!
+	-> wake up
+* You: Who *am* I? What sort of creature does this to their own mouth?!
+	-> wake up
+* You: Okay, I'm a bit scared now. Let's go back to the dark.
+	-> wake up
+
+
+== wake up
+Limbic System: A fiery streak penetrates your skull, trying to force your eyes open.
+	It's a sound. A clarion call from hell.
+Encyclopedia: Somehow you know what it is -- a Coupris Kineema motor carriage.
+You: [Open your eyes.] #end
+
+
+== ex
+Limbic System: An awareness creeps up on you. A mass lies hidden in your dead angle, soaking in some lurid, acidic sauce.
+	It's bloated and shameful, a ball of meat surrounding you... This is a terrible line of questioning,
+	and it will only lead to more awareness of the meat-thing.
+
+* You: \(Plunge back into the fathomless deep.)
+	Ancient Reptilian Brain:
+		There. No ball of meat, no light in the formless nothing. Just nightswimming!
+	-> nothing options
+* You: No, I wanted to know about the ex-something.
+	Ancient Reptilian Brain: Ex-love, ex-tenderness. It is foolish of you to resurface to the loss.
+		Not after all the damage you suffered to get here, some of it irreversible...
+		Stay, sail with me through the Abyssopelagic Zone!
+	-> cough up options
+
+
+== ball and apes
+Limbic System: There's this giant ball there. And evil apes.
+	And the evil apes are dukin' it out on the ball. You're one of them.
+	It's basically all just evil apes dukin' it out on a giant ball. 
+
+* You: How big is the ball?
+	Limbic System: You can't even make out it's a ball, when you're dukin' it out. It's that large. { set whirlingDreamOneApesCounter += 1 }
+	<-
+* You: How small are the apes?
+	Limbic System: Infinitesimally small. { set whirlingDreamOneApesCounter += 1 }
+	<-
+* You: And this *dukin' it out* I keep hearing about - what's that? { whirlingDreamOneApesCounter >= 2 }
+	Limbic System: Vying for resources? It's just a stupid expression you picked up somewhere.
+		The part of the presentation you want to take home with you is this\: you have to beat the other evil
+		apes in the face or you lose.
+	-> dunkin options
+
+
+== dunkin options
+* You: That's sad.
+	-> sad ending
+* You: That sounds like something I would like to do -- let's go!
+	{ set whirlingDreamOneBrave }
+	-> i dont care
+
+
+== sad ending
+Limbic System: Yes, it is. And you drowned in that sadness a long time ago.
+You: What do you mean *drowned*?
+Limbic System: You lost.
+Encyclopedia: - The sound outside -- you recognize it. It's a Coupris Kineema motor carriage. { @passive_check_intro_encyclopedia }
+You: [Open your eyes.] #end

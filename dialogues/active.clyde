@@ -1,0 +1,36 @@
+--
+-- Active checks example
+--
++ This option has no checks
+	No checks at all!!
+	<-
+* [Visual Calculus - Medium 9 ] This option has a red check #red-check
+	-> calculus red check <-
++ [Visual Calculus - Easy 9 ] This option has a white check #white-check { not demo_check_success }
+	-> calculus white check <-
++ Leave
+	-> END
+
+== calculus red check
+{ trigger active_check("visual_calculus", 9) } " " #active-check-start
+{
+	match @active_check_result
+		true: Visual Calculus: Your red check succeeded
+		false: Visual Calculus: Your red check failed
+}
+<-
+
+== calculus white check
+{ trigger active_check("visual_calculus", 9) } " " #active-check-start
+{
+	match @active_check_result
+		true:
+			Visual Calculus:
+					Your white check succeded. { set demo_check_success }
+					This means you won't see the white option in the list anymore.
+		false:
+			Visual Calculus:
+				Your white check failed.
+				Don't worry! You can try again.
+}
+<-

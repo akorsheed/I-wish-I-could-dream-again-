@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://ltwhxc6oap2c"]
+
+[ext_resource type="Script" uid="uid://orcqpquirjav" path="res://dialogue_system/dialogue_drawer.gd" id="1_rtfiw"]
+[ext_resource type="Texture2D" uid="uid://bc70ef48luwnv" path="res://speakers/portraits/visual-calculus.png" id="2_8gow4"]
+[ext_resource type="PackedScene" uid="uid://dmfhd0w1alirt" path="res://dialogue_system/continue_button.tscn" id="2_kv2xt"]
+
+[sub_resource type="Theme" id="Theme_rtfiw"]
+default_font_size = 20
+RichTextLabel/colors/default_color = Color(0.811765, 0.827451, 0.772549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvfm1"]
+content_margin_left = 40.0
+content_margin_top = 40.0
+content_margin_right = 40.0
+content_margin_bottom = 40.0
+bg_color = Color(0, 0, 0, 0.862745)
+border_width_left = 20
+border_width_right = 20
+border_color = Color(0.490196, 0.490196, 0.490196, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kv2xt"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.133196, 0.133196, 0.133196, 1)
+
+[node name="DialogueDrawer" type="MarginContainer"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -550.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = SubResource("Theme_rtfiw")
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+script = ExtResource("1_rtfiw")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(550, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nvfm1")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="inner_container" type="VBoxContainer" parent="PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="dialogue_entries" type="VBoxContainer" parent="PanelContainer/ScrollContainer/inner_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="ContinueButton" parent="PanelContainer/ScrollContainer/inner_container" instance=ExtResource("2_kv2xt")]
+visible = false
+layout_mode = 2
+
+[node name="PortraitContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = -195
+theme_override_constants/margin_top = 200
+
+[node name="PanelContainer" type="PanelContainer" parent="PortraitContainer"]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_kv2xt")
+
+[node name="TextureRect" type="TextureRect" parent="PortraitContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("2_8gow4")
+expand_mode = 3
+
+[connection signal="pressed" from="PanelContainer/ScrollContainer/inner_container/ContinueButton" to="." method="_on_continue_button_pressed"]

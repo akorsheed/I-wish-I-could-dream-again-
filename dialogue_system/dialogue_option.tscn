@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpiyt3yp8e3x7"]
+
+[ext_resource type="Script" uid="uid://c20cjf80lxjcu" path="res://dialogue_system/dialogue_option.gd" id="1_pkjeq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pkjeq"]
+resource_local_to_scene = true
+content_margin_left = 10.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pt7a4"]
+resource_local_to_scene = true
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="DialogueOption" type="PanelContainer"]
+offset_right = 111.0
+offset_bottom = 23.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pkjeq")
+script = ExtResource("1_pkjeq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="opt_number" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "1."
+
+[node name="opt_label" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.760784, 0.317647, 0.168627, 1)
+theme_override_colors/font_pressed_color = Color(0.694121, 0.694121, 0.694121, 1)
+theme_override_styles/focus = SubResource("StyleBoxFlat_pt7a4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pt7a4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pt7a4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pt7a4")
+text = "Option 1"
+alignment = 0
+autowrap_mode = 2
+
+[connection signal="mouse_entered" from="HBoxContainer/opt_label" to="." method="_on_opt_label_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/opt_label" to="." method="_on_opt_label_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/opt_label" to="." method="_on_opt_label_pressed"]

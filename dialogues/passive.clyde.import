@@ -1,0 +1,14 @@
+[remap]
+
+importer="clyde.dialogue"
+type="ClydeDialogueFile"
+uid="uid://b4afjw6w37g1j"
+path="res://.godot/imported/passive.clyde-8a691012d127e04389132a99a2552d3e.res"
+
+[deps]
+
+source_file="res://dialogues/passive.clyde"
+dest_files=["res://.godot/imported/passive.clyde-8a691012d127e04389132a99a2552d3e.res"]
+
+[params]
+

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvxg13t7gs81"]
+
+[ext_resource type="Script" uid="uid://bo5grpld3q3mv" path="res://dialogue_system/dialogue_entry.gd" id="1_pt7a4"]
+
+[node name="DialogueEntry" type="MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+script = ExtResource("1_pt7a4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "SPEAKER - Dialogue line"
+fit_content = true
+
+[node name="options" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2

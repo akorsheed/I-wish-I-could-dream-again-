@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmfhd0w1alirt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol573"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.517647, 0.207843, 0.117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg3fx"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.456449, 0.179199, 0.098433, 1)
+
+[node name="ContinueButton" type="Button"]
+offset_right = 54.0
+offset_bottom = 40.0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ol573")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jg3fx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jg3fx")
+theme_override_styles/focus = SubResource("StyleBoxFlat_jg3fx")
+text = "CONTINUE"
+alignment = 0
