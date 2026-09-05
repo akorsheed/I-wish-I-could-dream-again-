@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Material" path="res://materials/blockout_material.tres" id="1_mat"]
+[ext_resource type="Script" path="res://interactables/interaction_area.gd" id="2_script"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_desk_col"]
+size = Vector3(2.2, 1.0, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_desk"]
+material = ExtResource("1_mat")
+size = Vector3(2.2, 1.0, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dossier"]
+material = ExtResource("1_mat")
+size = Vector3(0.5, 0.06, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_interact"]
+size = Vector3(3.5, 2.0, 3.2)
+
+[node name="InspectionDesk" type="StaticBody3D"]
+collision_layer = 1
+collision_mask = 2
+
+[node name="DeskCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_desk_col")
+
+[node name="DeskMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_desk")
+
+[node name="Dossier" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -0.4, 1.03, 0.1)
+mesh = SubResource("BoxMesh_dossier")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("2_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_interact")
+
+[node name="PromptLabel" type="Label3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, 0)
+visible = false
+billboard = 1
+text = "[E] Inspect Case Notes"
+font_size = 28
+outline_size = 8
+outline_color = Color(0.08, 0.08, 0.08, 1)

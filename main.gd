@@ -2,11 +2,15 @@ extends Node3D
 
 @onready var _dialogue_drawer = $HUD/DialogueDrawer
 @onready var _dialogue_list = $HUD/DialogueList
+@onready var _player = get_node_or_null("scene/Player")
 
 var is_dialogue_running: bool = false
 
 func _ready() -> void:
 	_dialogue_drawer.hide()
+	var desk_area = get_node_or_null("scene/RoomBlockout/InspectionDesk/InteractionArea")
+	if desk_area and not desk_area.interacted.is_connected(_on_desk_interacted):
+		desk_area.interacted.connect(_on_desk_interacted)
 
 
 func _input(event: InputEvent) -> void:
@@ -25,6 +29,8 @@ func _on_dialogue_drawer_dialogue_ended() -> void:
 	_dialogue_drawer.hide()
 	_dialogue_list.show()
 	is_dialogue_running = false
+	if _player:
+		_player.can_move = true
 
 
 func _on_test_dialogue_button_pressed() -> void:
@@ -47,11 +53,18 @@ func _on_variables_dialogue_button_pressed() -> void:
 	_start_dialogue("variables")
 
 
+func _on_desk_interacted() -> void:
+	if not is_dialogue_running:
+		_start_dialogue("intro")
+
+
 func _start_dialogue(dialogue: String) -> void:
 	_dialogue_list.hide()
 	_dialogue_drawer.show()
 	_dialogue_drawer.start(dialogue)
 	is_dialogue_running = true
+	if _player:
+		_player.can_move = false
 
 
 func _on_dialogue_drawer_active_check_started() -> void:

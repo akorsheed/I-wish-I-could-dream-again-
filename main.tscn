@@ -1,15 +1,45 @@
-[gd_scene load_steps=7 format=3 uid="uid://joqju5gkcy0j"]
+[gd_scene load_steps=18 format=3 uid="uid://joqju5gkcy0j"]
 
-[ext_resource type="Script" uid="uid://ct4qw6sp5c36c" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://ltwhxc6oap2c" path="res://dialogue_system/dialogue_drawer.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://qtxb7q4nkvo5" path="res://checks/active_check_animation.tscn" id="3_h2yge"]
+[ext_resource type="Script" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Material" path="res://materials/blockout_material.tres" id="2_blockout_mat"]
+[ext_resource type="PackedScene" path="res://interactables/inspection_desk.tscn" id="3_desk"]
+[ext_resource type="PackedScene" path="res://player/player.tscn" id="4_player"]
+[ext_resource type="PackedScene" uid="uid://ltwhxc6oap2c" path="res://dialogue_system/dialogue_drawer.tscn" id="5_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://qtxb7q4nkvo5" path="res://checks/active_check_animation.tscn" id="6_h2yge"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-albedo_color = Color(0.145098, 0.133333, 0.121569, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+material = ExtResource("2_blockout_mat")
+size = Vector3(14, 0.5, 14)
 
-[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
-material = SubResource("StandardMaterial3D_h2yge")
-size = Vector3(20, 1, 20)
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(14, 0.5, 14)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_nw"]
+material = ExtResource("2_blockout_mat")
+size = Vector3(0.5, 5, 14)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_nw"]
+size = Vector3(0.5, 5, 14)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_ne"]
+material = ExtResource("2_blockout_mat")
+size = Vector3(14, 5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wall_ne"]
+size = Vector3(14, 5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boundary_s"]
+size = Vector3(14, 4, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boundary_e"]
+size = Vector3(0.5, 4, 14)
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 1
+background_color = Color(0.08, 0.08, 0.09, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.35, 0.38, 0.42, 1)
+ambient_light_energy = 0.6
 
 [sub_resource type="Theme" id="Theme_h2yge"]
 default_font_size = 32
@@ -17,21 +47,84 @@ default_font_size = 32
 [node name="main" type="Node3D"]
 script = ExtResource("1_0xm2m")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_main")
+
 [node name="scene" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="scene"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.456362, 0)
-mesh = SubResource("BoxMesh_h2yge")
+[node name="RoomBlockout" type="Node3D" parent="scene"]
+
+[node name="Floor" type="StaticBody3D" parent="scene/RoomBlockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+collision_layer = 1
+collision_mask = 2
+
+[node name="FloorMesh" type="MeshInstance3D" parent="scene/RoomBlockout/Floor"]
+mesh = SubResource("BoxMesh_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/RoomBlockout/Floor"]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="WallNW" type="StaticBody3D" parent="scene/RoomBlockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75, 2.5, 0)
+collision_layer = 1
+collision_mask = 2
+
+[node name="WallMeshNW" type="MeshInstance3D" parent="scene/RoomBlockout/WallNW"]
+mesh = SubResource("BoxMesh_wall_nw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/RoomBlockout/WallNW"]
+shape = SubResource("BoxShape3D_wall_nw")
+
+[node name="WallNE" type="StaticBody3D" parent="scene/RoomBlockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -6.75)
+collision_layer = 1
+collision_mask = 2
+
+[node name="WallMeshNE" type="MeshInstance3D" parent="scene/RoomBlockout/WallNE"]
+mesh = SubResource("BoxMesh_wall_ne")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/RoomBlockout/WallNE"]
+shape = SubResource("BoxShape3D_wall_ne")
+
+[node name="InvisibleBoundaryS" type="StaticBody3D" parent="scene/RoomBlockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6.75)
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/RoomBlockout/InvisibleBoundaryS"]
+shape = SubResource("BoxShape3D_boundary_s")
+
+[node name="InvisibleBoundaryE" type="StaticBody3D" parent="scene/RoomBlockout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.75, 2, 0)
+collision_layer = 1
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/RoomBlockout/InvisibleBoundaryE"]
+shape = SubResource("BoxShape3D_boundary_e")
+
+[node name="InspectionDesk" parent="scene/RoomBlockout" instance=ExtResource("3_desk")]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -0.5, 0, -1.8)
+
+[node name="Player" parent="scene" instance=ExtResource("4_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 1.2)
 
 [node name="Camera3D" type="Camera3D" parent="scene"]
-transform = Transform3D(0.777695, -0.330231, 0.534919, 0, 0.850912, 0.525308, -0.628642, -0.40853, 0.66175, 3.40443, 3.56298, 6.86403)
+transform = Transform3D(0.707107, -0.408244, 0.577353, 0, 0.816501, 0.577345, -0.707107, -0.408244, 0.577353, 12, 12, 12)
+projection = 1
+size = 11.5
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="scene"]
-transform = Transform3D(0.927184, -0.301712, 0.222035, 0, 0.592716, 0.805411, -0.374607, -0.746764, 0.549557, 7.6615, 8.07943, 9.69723)
+transform = Transform3D(0.866025, -0.321394, 0.383022, 0, 0.766044, 0.642788, -0.5, -0.55667, 0.663414, 6, 9, 7)
+light_color = Color(1, 0.96, 0.89, 1)
+light_energy = 1.2
+shadow_enabled = true
+shadow_bias = 0.04
+directional_shadow_max_distance = 35.0
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="DialogueDrawer" parent="HUD" instance=ExtResource("1_ig7tw")]
+[node name="DialogueDrawer" parent="HUD" instance=ExtResource("5_ig7tw")]
 offset_left = -630.0
 
 [node name="DialogueList" type="MarginContainer" parent="HUD"]
@@ -80,7 +173,7 @@ layout_mode = 2
 focus_mode = 0
 text = "Variables"
 
-[node name="ActiveCheckAnimation" parent="HUD" instance=ExtResource("3_h2yge")]
+[node name="ActiveCheckAnimation" parent="HUD" instance=ExtResource("6_h2yge")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -118,6 +211,7 @@ text = "Restart scene"
 [connection signal="active_check_ended" from="HUD/DialogueDrawer" to="." method="_on_dialogue_drawer_active_check_ended"]
 [connection signal="active_check_started" from="HUD/DialogueDrawer" to="." method="_on_dialogue_drawer_active_check_started"]
 [connection signal="dialogue_ended" from="HUD/DialogueDrawer" to="." method="_on_dialogue_drawer_dialogue_ended"]
+[connection signal="interacted" from="scene/RoomBlockout/InspectionDesk/InteractionArea" to="." method="_on_desk_interacted"]
 [connection signal="pressed" from="HUD/DialogueList/VBoxContainer/intro_dialogue" to="." method="_on_intro_dialogue_pressed"]
 [connection signal="pressed" from="HUD/DialogueList/VBoxContainer/passive_dialogue" to="." method="_on_passive_dialogue_pressed"]
 [connection signal="pressed" from="HUD/DialogueList/VBoxContainer/active_dialogue" to="." method="_on_active_dialogue_pressed"]

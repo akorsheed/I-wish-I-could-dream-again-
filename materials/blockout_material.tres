@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3]
+
+[ext_resource type="Shader" path="res://shaders/blockout_oil_paint.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" path="res://textures/oil_painting_bg.png" id="2_texture"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/base_tint = Color(0.85, 0.82, 0.77, 1)
+shader_parameter/texture_strength = 0.85
+shader_parameter/roughness = 0.95
+shader_parameter/canvas_grain = 0.05
+shader_parameter/canvas_scale = 500.0
+shader_parameter/albedo_texture = ExtResource("2_texture")
