@@ -1,133 +1,90 @@
-[gd_scene load_steps=18 format=3 uid="uid://joqju5gkcy0j"]
+[gd_scene format=3 uid="uid://joqju5gkcy0j"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="Material" path="res://materials/blockout_material.tres" id="2_blockout_mat"]
-[ext_resource type="PackedScene" path="res://interactables/inspection_desk.tscn" id="3_desk"]
-[ext_resource type="PackedScene" path="res://player/player.tscn" id="4_player"]
-[ext_resource type="PackedScene" uid="uid://ltwhxc6oap2c" path="res://dialogue_system/dialogue_drawer.tscn" id="5_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://qtxb7q4nkvo5" path="res://checks/active_check_animation.tscn" id="6_h2yge"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_floor"]
-material = ExtResource("2_blockout_mat")
-size = Vector3(14, 0.5, 14)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
-size = Vector3(14, 0.5, 14)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wall_nw"]
-material = ExtResource("2_blockout_mat")
-size = Vector3(0.5, 5, 14)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_wall_nw"]
-size = Vector3(0.5, 5, 14)
-
-[sub_resource type="BoxMesh" id="BoxMesh_wall_ne"]
-material = ExtResource("2_blockout_mat")
-size = Vector3(14, 5, 0.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_wall_ne"]
-size = Vector3(14, 5, 0.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_boundary_s"]
-size = Vector3(14, 4, 0.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_boundary_e"]
-size = Vector3(0.5, 4, 14)
+[ext_resource type="Script" uid="uid://ct4qw6sp5c36c" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bge8haov8twwt" path="res://scenes/lovecraft_proxy.glb" id="3_proxy"]
+[ext_resource type="Script" uid="uid://oh2g6bmwlhy1" path="res://scenes/lovecraft_proxy.gd" id="4_proxy_script"]
+[ext_resource type="PackedScene" path="res://player/player.tscn" id="5_player"]
+[ext_resource type="Script" uid="uid://bxgrs5ixfewg6" path="res://interactables/interaction_area.gd" id="6_interact_script"]
+[ext_resource type="PackedScene" uid="uid://ltwhxc6oap2c" path="res://dialogue_system/dialogue_drawer.tscn" id="7_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://qtxb7q4nkvo5" path="res://checks/active_check_animation.tscn" id="8_h2yge"]
 
 [sub_resource type="Environment" id="Environment_main"]
 background_mode = 1
-background_color = Color(0.08, 0.08, 0.09, 1)
+background_color = Color(0.05, 0.05, 0.06, 1)
 ambient_light_source = 2
-ambient_light_color = Color(0.35, 0.38, 0.42, 1)
-ambient_light_energy = 0.6
+ambient_light_color = Color(0.4, 0.42, 0.45, 1)
+ambient_light_energy = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_desk_interact"]
+size = Vector3(3.5, 2, 3.5)
 
 [sub_resource type="Theme" id="Theme_h2yge"]
 default_font_size = 32
 
-[node name="main" type="Node3D"]
+[node name="main" type="Node3D" unique_id=2135480255]
 script = ExtResource("1_0xm2m")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1033162993]
 environment = SubResource("Environment_main")
 
-[node name="scene" type="Node3D" parent="."]
+[node name="scene" type="Node3D" parent="." unique_id=1607259354]
 
-[node name="RoomBlockout" type="Node3D" parent="scene"]
+[node name="lovecraft_proxy" parent="scene" unique_id=631708299 instance=ExtResource("3_proxy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26, 0)
+script = ExtResource("4_proxy_script")
 
-[node name="Floor" type="StaticBody3D" parent="scene/RoomBlockout"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-collision_layer = 1
+[node name="DeskInteractionArea" type="Area3D" parent="scene" unique_id=61992763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08, 0, -5.32)
+collision_layer = 4
 collision_mask = 2
+script = ExtResource("6_interact_script")
+prompt_text = "[E] Inspect Case Notes"
 
-[node name="FloorMesh" type="MeshInstance3D" parent="scene/RoomBlockout/Floor"]
-mesh = SubResource("BoxMesh_floor")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/DeskInteractionArea" unique_id=987919237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_desk_interact")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/RoomBlockout/Floor"]
-shape = SubResource("BoxShape3D_floor")
+[node name="PromptLabel" type="Label3D" parent="scene/DeskInteractionArea" unique_id=1569726304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+visible = false
+billboard = 1
+text = "[E] Inspect Case Notes"
+font_size = 28
+outline_size = 8
 
-[node name="WallNW" type="StaticBody3D" parent="scene/RoomBlockout"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75, 2.5, 0)
-collision_layer = 1
-collision_mask = 2
+[node name="Player" parent="scene" unique_id=453340728 instance=ExtResource("5_player")]
+transform = Transform3D(0.92, 0, 0, 0, 0.92, 0, 0, 0, 0.92, 2.5, 0, -2)
 
-[node name="WallMeshNW" type="MeshInstance3D" parent="scene/RoomBlockout/WallNW"]
-mesh = SubResource("BoxMesh_wall_nw")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/RoomBlockout/WallNW"]
-shape = SubResource("BoxShape3D_wall_nw")
-
-[node name="WallNE" type="StaticBody3D" parent="scene/RoomBlockout"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -6.75)
-collision_layer = 1
-collision_mask = 2
-
-[node name="WallMeshNE" type="MeshInstance3D" parent="scene/RoomBlockout/WallNE"]
-mesh = SubResource("BoxMesh_wall_ne")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/RoomBlockout/WallNE"]
-shape = SubResource("BoxShape3D_wall_ne")
-
-[node name="InvisibleBoundaryS" type="StaticBody3D" parent="scene/RoomBlockout"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6.75)
-collision_layer = 1
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/RoomBlockout/InvisibleBoundaryS"]
-shape = SubResource("BoxShape3D_boundary_s")
-
-[node name="InvisibleBoundaryE" type="StaticBody3D" parent="scene/RoomBlockout"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.75, 2, 0)
-collision_layer = 1
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="scene/RoomBlockout/InvisibleBoundaryE"]
-shape = SubResource("BoxShape3D_boundary_e")
-
-[node name="InspectionDesk" parent="scene/RoomBlockout" instance=ExtResource("3_desk")]
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -0.5, 0, -1.8)
-
-[node name="Player" parent="scene" instance=ExtResource("4_player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 1.2)
-
-[node name="Camera3D" type="Camera3D" parent="scene"]
-transform = Transform3D(0.707107, -0.408244, 0.577353, 0, 0.816501, 0.577345, -0.707107, -0.408244, 0.577353, 12, 12, 12)
+[node name="Camera3D" type="Camera3D" parent="scene" unique_id=358993608]
+transform = Transform3D(0.707107, -0.408248, 0.57735, 0, 0.816497, 0.57735, -0.707107, -0.408248, 0.57735, 35.8672, 31.0082, 23.3671)
+keep_aspect = 0
 projection = 1
-size = 11.5
+size = 32.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="scene"]
+[node name="DeskLampLight" type="OmniLight3D" parent="scene" unique_id=1285140932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 2.2, -5.3)
+light_color = Color(1, 0.85, 0.6, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.05
+omni_range = 20.0
+omni_attenuation = 0.9
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="scene" unique_id=424613105]
 transform = Transform3D(0.866025, -0.321394, 0.383022, 0, 0.766044, 0.642788, -0.5, -0.55667, 0.663414, 6, 9, 7)
-light_color = Color(1, 0.96, 0.89, 1)
-light_energy = 1.2
+visible = false
+light_color = Color(0.9, 0.92, 0.95, 1)
+light_energy = 0.8
 shadow_enabled = true
 shadow_bias = 0.04
 directional_shadow_max_distance = 35.0
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=634084763]
 
-[node name="DialogueDrawer" parent="HUD" instance=ExtResource("5_ig7tw")]
+[node name="DialogueDrawer" parent="HUD" unique_id=1143988104 instance=ExtResource("7_ig7tw")]
 offset_left = -630.0
 
-[node name="DialogueList" type="MarginContainer" parent="HUD"]
+[node name="DialogueList" type="MarginContainer" parent="HUD" unique_id=476635183]
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
@@ -135,45 +92,45 @@ theme = SubResource("Theme_h2yge")
 theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 80
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/DialogueList"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/DialogueList" unique_id=1412419119]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD/DialogueList/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/DialogueList/VBoxContainer" unique_id=745349536]
 layout_mode = 2
 theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="HUD/DialogueList/VBoxContainer/MarginContainer"]
+[node name="Label" type="Label" parent="HUD/DialogueList/VBoxContainer/MarginContainer" unique_id=265087311]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Dialogues"
 
-[node name="intro_dialogue" type="Button" parent="HUD/DialogueList/VBoxContainer"]
+[node name="intro_dialogue" type="Button" parent="HUD/DialogueList/VBoxContainer" unique_id=288937080]
 layout_mode = 2
 focus_mode = 0
 text = "Intro"
 
-[node name="passive_dialogue" type="Button" parent="HUD/DialogueList/VBoxContainer"]
+[node name="passive_dialogue" type="Button" parent="HUD/DialogueList/VBoxContainer" unique_id=1598534118]
 layout_mode = 2
 focus_mode = 0
 text = "Passive Check"
 
-[node name="active_dialogue" type="Button" parent="HUD/DialogueList/VBoxContainer"]
+[node name="active_dialogue" type="Button" parent="HUD/DialogueList/VBoxContainer" unique_id=1011503901]
 layout_mode = 2
 focus_mode = 0
 text = "Active Check"
 
-[node name="test_dialogue_button" type="Button" parent="HUD/DialogueList/VBoxContainer"]
+[node name="test_dialogue_button" type="Button" parent="HUD/DialogueList/VBoxContainer" unique_id=1023321187]
 layout_mode = 2
 focus_mode = 0
 text = "Test"
 
-[node name="variables_dialogue_button" type="Button" parent="HUD/DialogueList/VBoxContainer"]
+[node name="variables_dialogue_button" type="Button" parent="HUD/DialogueList/VBoxContainer" unique_id=638213012]
 layout_mode = 2
 focus_mode = 0
 text = "Variables"
 
-[node name="ActiveCheckAnimation" parent="HUD" instance=ExtResource("6_h2yge")]
+[node name="ActiveCheckAnimation" parent="HUD" unique_id=1458633654 instance=ExtResource("8_h2yge")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -187,7 +144,7 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=695609629]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -201,17 +158,17 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="restart_scene_button" type="Button" parent="HUD/MarginContainer"]
+[node name="restart_scene_button" type="Button" parent="HUD/MarginContainer" unique_id=782293581]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 48
 text = "Restart scene"
 
+[connection signal="interacted" from="scene/DeskInteractionArea" to="." method="_on_desk_interacted"]
 [connection signal="active_check_ended" from="HUD/DialogueDrawer" to="." method="_on_dialogue_drawer_active_check_ended"]
 [connection signal="active_check_started" from="HUD/DialogueDrawer" to="." method="_on_dialogue_drawer_active_check_started"]
 [connection signal="dialogue_ended" from="HUD/DialogueDrawer" to="." method="_on_dialogue_drawer_dialogue_ended"]
-[connection signal="interacted" from="scene/RoomBlockout/InspectionDesk/InteractionArea" to="." method="_on_desk_interacted"]
 [connection signal="pressed" from="HUD/DialogueList/VBoxContainer/intro_dialogue" to="." method="_on_intro_dialogue_pressed"]
 [connection signal="pressed" from="HUD/DialogueList/VBoxContainer/passive_dialogue" to="." method="_on_passive_dialogue_pressed"]
 [connection signal="pressed" from="HUD/DialogueList/VBoxContainer/active_dialogue" to="." method="_on_active_dialogue_pressed"]

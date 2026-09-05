@@ -1,10 +1,10 @@
 shader_type spatial;
-render_mode diffuse_toon, specular_disabled;
+render_mode diffuse_lambert, depth_draw_opaque, cull_back;
 
 // Stylized painterly palette
-uniform vec4 albedo : source_color = vec4(0.32, 0.42, 0.38, 1.0); // Muted detective green/grey coat
-uniform vec4 shadow_color : source_color = vec4(0.12, 0.14, 0.18, 1.0); // Moody cool shadow
-uniform vec4 highlight_color : source_color = vec4(0.85, 0.78, 0.65, 1.0); // Warm painterly highlight
+uniform vec4 albedo_color : source_color = vec4(0.9, 0.85, 0.8, 1.0); // Clear bright baseline tone
+uniform vec4 shadow_color : source_color = vec4(0.2, 0.22, 0.28, 1.0); // Moody cool shadow
+uniform vec4 highlight_color : source_color = vec4(1.0, 0.96, 0.88, 1.0); // Warm painterly highlight
 
 // Stepped lighting parameters
 uniform int light_steps : hint_range(2, 6) = 3;
@@ -37,7 +37,7 @@ float screen_noise(vec2 uv) {
 }
 
 void fragment() {
-	ALBEDO = albedo.rgb;
+	ALBEDO = albedo_color.rgb;
 	ROUGHNESS = 0.95;
 	SPECULAR = 0.0;
 }
@@ -78,8 +78,6 @@ void light() {
 		lit_color = mix(ALBEDO, highlight_color.rgb, (stepped - 0.5) * 2.0);
 	}
 	
-	lit_color += grain;
-	
-	// Accumulate diffuse light
-	DIFFUSE_LIGHT += lit_color * LIGHT_COLOR;
+	// Accumulate diffuse light with ambient floor term
+	DIFFUSE_LIGHT += ALBEDO * max(stepped * LIGHT_COLOR * ATTENUATION, vec3(0.25));
 }

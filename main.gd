@@ -8,7 +8,9 @@ var is_dialogue_running: bool = false
 
 func _ready() -> void:
 	_dialogue_drawer.hide()
-	var desk_area = get_node_or_null("scene/RoomBlockout/InspectionDesk/InteractionArea")
+	var desk_area = get_node_or_null("scene/DeskInteractionArea")
+	if not desk_area:
+		desk_area = get_node_or_null("scene/RoomBlockout/InspectionDesk/InteractionArea")
 	if desk_area and not desk_area.interacted.is_connected(_on_desk_interacted):
 		desk_area.interacted.connect(_on_desk_interacted)
 
