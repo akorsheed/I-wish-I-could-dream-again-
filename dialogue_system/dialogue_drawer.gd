@@ -5,6 +5,7 @@ signal active_check_started
 signal active_check_ended
 
 const SPEAKER_RESOURCES_FOLDER: String = "res://speakers/"
+const DEFAULT_PORTRAIT: String = "res://speakers/lilith.png" # Fallback portrait path
 
 const DialogueEntryScene = preload("res://dialogue_system/dialogue_entry.tscn")
 const DialogueEndScene = preload("res://dialogue_system/end_button.tscn")
@@ -32,6 +33,12 @@ var _dialogue: ClydeDialogue
 var _last_entry: DialogueEntry
 
 func _ready() -> void:
+	# Keep the drawer and portrait frame permanently visible on screen
+	show()
+	if _speaker_picture_container:
+		_speaker_picture_container.show()
+	_load_portrait_for_speaker(null)
+	
 	_scroll_bar.changed.connect(_on_scroll_bar_changed)
 
 func start(dialogue_name: String) -> void:
@@ -132,13 +139,38 @@ func _create_entry(content: Dictionary) -> DialogueEntry:
 	var speaker_resource = _get_speaker_resource(content.speaker)
 	entry.set_content(speaker_resource, "" if content.text == null else content.text, "")
 
-	if speaker_resource.portrait_path != "" and ResourceLoader.exists(speaker_resource.portrait_path):
-		_speaker_picture_container.show()
-		_speaker_picture.texture = load(speaker_resource.portrait_path)
-	else:
-		_speaker_picture_container.hide()
+	# Always ensure picture container stays open and update image to active speaker
+	_load_portrait_for_speaker(content.speaker, speaker_resource)
 
 	return entry
+
+func _load_portrait_for_speaker(speaker_name, speaker_resource: Speaker = null) -> void:
+	if not _speaker_picture_container or not _speaker_picture:
+		return
+
+	_speaker_picture_container.show()
+	
+	var portrait_path: String = ""
+
+	# 1. Check designated Speaker resource path
+	if speaker_resource != null and speaker_resource.portrait_path != "":
+		portrait_path = speaker_resource.portrait_path
+
+	# 2. Check direct .png match by speaker name in folder
+	if portrait_path == "" or not ResourceLoader.exists(portrait_path):
+		if speaker_name != null and str(speaker_name) != "":
+			var direct_png = "%s%s.png" % [SPEAKER_RESOURCES_FOLDER, speaker_name]
+			if ResourceLoader.exists(direct_png):
+				portrait_path = direct_png
+
+	# 3. Fallback to default portrait
+	if portrait_path == "" or not ResourceLoader.exists(portrait_path):
+		if ResourceLoader.exists(DEFAULT_PORTRAIT):
+			portrait_path = DEFAULT_PORTRAIT
+
+	# Apply texture if valid
+	if portrait_path != "" and ResourceLoader.exists(portrait_path):
+		_speaker_picture.texture = load(portrait_path)
 
 func _add_dialogue_end_entry() -> void:
 	var button: Button = DialogueEndScene.instantiate()
