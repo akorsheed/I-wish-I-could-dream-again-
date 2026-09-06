@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://shaders/oil_painting.gdshader" id="1_shader"]
+
+[resource]
+shader = ExtResource("1_shader")
+shader_parameter/radius = 2
+shader_parameter/color_boost = 1.05
+shader_parameter/vignette_intensity = 0.35
+shader_parameter/canvas_strength = 0.12
+shader_parameter/canvas_scale = 8.0

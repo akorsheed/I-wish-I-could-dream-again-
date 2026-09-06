@@ -43,6 +43,7 @@ func _setup_character_materials() -> void:
 		var mesh_instance: MeshInstance3D = node as MeshInstance3D
 		if not mesh_instance or not mesh_instance.mesh:
 			continue
+		mesh_instance.layers = 2
 		for surface_idx in range(mesh_instance.mesh.get_surface_count()):
 			# Preserve any surface override already assigned in the scene (e.g. hair material)
 			if mesh_instance.get_surface_override_material(surface_idx) != null:

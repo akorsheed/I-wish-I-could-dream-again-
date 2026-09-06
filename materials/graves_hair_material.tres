@@ -1,10 +1,15 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cbvj86wlkxqtd"]
 
-[ext_resource type="Texture2D" path="res://player/graves_character_necro_hair_color_tga_3ee77326.png" id="1_hair_tex"]
-[ext_resource type="Texture2D" path="res://player/graves_character_necro_hair_rough.png" id="2_hair_rough"]
+[ext_resource type="Texture2D" uid="uid://h3e0k8dbv36q" path="res://player/graves_character_necro_hair_color_tga_3ee77326.png" id="1_hair_tex"]
+[ext_resource type="Texture2D" uid="uid://ddanpuvagn6k0" path="res://player/graves_character_necro_hair_rough.png" id="2_hair_rough"]
 
 [resource]
 resource_name = "Graves_Hair_Orange"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+depth_draw_mode = 1
 albedo_color = Color(0.92, 0.45, 0.1, 1)
 albedo_texture = ExtResource("1_hair_tex")
 roughness = 0.85
