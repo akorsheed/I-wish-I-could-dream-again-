@@ -7,24 +7,6 @@
 [ext_resource type="Script" uid="uid://bxgrs5ixfewg6" path="res://interactables/interaction_area.gd" id="6_interact_script"]
 [ext_resource type="PackedScene" uid="uid://ltwhxc6oap2c" path="res://dialogue_system/dialogue_drawer.tscn" id="7_ig7tw"]
 [ext_resource type="Material" path="res://materials/oil_painting_material.tres" id="9_oil_mat"]
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pill"]
-content_margin_left = 16.0
-content_margin_top = 6.0
-content_margin_right = 16.0
-content_margin_bottom = 6.0
-bg_color = Color(0.06, 0.07, 0.09, 0.85)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 0.18)
-corner_radius_top_left = 14
-corner_radius_top_right = 14
-corner_radius_bottom_right = 14
-corner_radius_bottom_left = 14
-shadow_color = Color(0, 0, 0, 0.35)
-shadow_size = 4
-shadow_offset = Vector2(0, 2)
 
 [sub_resource type="Environment" id="Environment_main"]
 background_mode = 1
@@ -169,39 +151,8 @@ shadow_mesh = SubResource("ArrayMesh_bcu1l")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_x62c1"]
 data = PackedVector3Array(5.526119, 0.2539463, -9.510254, 8.653473, 0.2539463, -10.515598, 5.526119, 0.2539463, -10.515598, 5.526119, 0.2539463, -9.510254, 8.653473, 0.2539463, -9.510254, 8.653473, 0.2539463, -10.515598, 5.526119, 5.363273, -9.510254, 8.653473, 5.363273, -10.515598, 8.653473, 5.363273, -9.510254, 5.526119, 5.363273, -9.510254, 5.526119, 5.363273, -10.515598, 8.653473, 5.363273, -10.515598, 5.526119, 0.2539463, -9.510254, 8.653473, 5.363273, -9.510254, 8.653473, 0.2539463, -9.510254, 5.526119, 0.2539463, -9.510254, 5.526119, 5.363273, -9.510254, 8.653473, 5.363273, -9.510254, 8.653473, 0.2539463, -9.510254, 8.653473, 5.363273, -10.515598, 8.653473, 0.2539463, -10.515598, 8.653473, 0.2539463, -9.510254, 8.653473, 5.363273, -9.510254, 8.653473, 5.363273, -10.515598, 8.653473, 0.2539463, -10.515598, 5.526119, 5.363273, -10.515598, 5.526119, 0.2539463, -10.515598, 8.653473, 0.2539463, -10.515598, 8.653473, 5.363273, -10.515598, 5.526119, 5.363273, -10.515598, 5.526119, 0.2539463, -10.515598, 5.526119, 5.363273, -9.510254, 5.526119, 0.2539463, -9.510254, 5.526119, 0.2539463, -10.515598, 5.526119, 5.363273, -10.515598, 5.526119, 5.363273, -9.510254)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_261c2"]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_py8qs"]
-_surfaces = [{
-"aabb": AABB(0.9936981, 0.2556979, -7.1948767, 2.1728854, 1.9300821, 3.7451687),
-"format": 34896613377,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAgADAAUAAgAFAAAAAAAGAAQAAAAFAAYABAAHAAEAAQAHAAMABAAGAAcABQADAAcABQAHAAYA"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 8,
-"vertex_data": PackedByteArray("AAAAAP//AAD//wAAAAAAAAAAAAAAAAAAAAD//wAAAAD//wAA//8AAAAA/////wAA////////AAD/////AAAAAA==")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_dnss7"]
-resource_name = "lovecraft_proxy_Desk-col"
-_surfaces = [{
-"aabb": AABB(0.9936981, 0.2556979, -7.1948767, 2.1728854, 1.9300821, 3.7451687),
-"format": 34896613383,
-"index_count": 36,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
-"material": SubResource("StandardMaterial3D_261c2"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 24,
-"vertex_data": PackedByteArray("AAAAAP///////wAAAAD//wAAAAAAAP////8AAP////8AAP////////////8AAP////////////8AAP//AAD//wAAAAD///+//////////7///wAA////vwAA//////+///8AAP//////////AAD/////AAAAAP///////////////wAAAAD//wAA//8AAP//AAAAAAAA////////AAD//wAAAAAAAP+/AAD//////78AAAAA////vwAA//8AAP+//3//P/9//z//f/8//3//P/9//7//f/+//3//v/9//7//f/9//3//f/9//3//f/9//7//f/+//3//v/9//7//f/8//7//P/+//z//v/8//7//f////3////9/////f///")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_py8qs")
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hkilw"]
-data = PackedVector3Array(0.9936981, 0.2556979, -3.449708, 3.1665835, 0.2556979, -7.1948767, 0.9936981, 0.2556979, -7.1948767, 0.9936981, 0.2556979, -3.449708, 3.1665835, 0.2556979, -3.449708, 3.1665835, 0.2556979, -7.1948767, 0.9936981, 2.18578, -3.449708, 3.1665835, 2.18578, -7.1948767, 3.1665835, 2.18578, -3.449708, 0.9936981, 2.18578, -3.449708, 0.9936981, 2.18578, -7.1948767, 3.1665835, 2.18578, -7.1948767, 0.9936981, 0.2556979, -3.449708, 3.1665835, 2.18578, -3.449708, 3.1665835, 0.2556979, -3.449708, 0.9936981, 0.2556979, -3.449708, 0.9936981, 2.18578, -3.449708, 3.1665835, 2.18578, -3.449708, 3.1665835, 0.2556979, -3.449708, 3.1665835, 2.18578, -7.1948767, 3.1665835, 0.2556979, -7.1948767, 3.1665835, 0.2556979, -3.449708, 3.1665835, 2.18578, -3.449708, 3.1665835, 2.18578, -7.1948767, 3.1665835, 0.2556979, -7.1948767, 0.9936981, 2.18578, -7.1948767, 0.9936981, 0.2556979, -7.1948767, 3.1665835, 0.2556979, -7.1948767, 3.1665835, 2.18578, -7.1948767, 0.9936981, 2.18578, -7.1948767, 0.9936981, 0.2556979, -7.1948767, 0.9936981, 2.18578, -3.449708, 0.9936981, 0.2556979, -3.449708, 0.9936981, 0.2556979, -7.1948767, 0.9936981, 2.18578, -7.1948767, 0.9936981, 2.18578, -3.449708)
+[sub_resource type="BoxShape3D" id="BoxShape3D_desk"]
+size = Vector3(3.6773438, 4, 6.2199583)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eb13b"]
 
@@ -248,6 +199,25 @@ size = Vector3(0.4, 4, 12.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_desk_interact"]
 size = Vector3(3.5, 2, 3.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pill"]
+content_margin_left = 16.0
+content_margin_top = 6.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.06, 0.07, 0.09, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.18)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
 
 [node name="main" type="Node3D" unique_id=2135480255]
 script = ExtResource("1_0xm2m")
@@ -305,16 +275,13 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="scene/lovecraft_proxy/Bookcase_2/StaticBody3D" unique_id=1283450100]
 shape = SubResource("ConcavePolygonShape3D_x62c1")
 
-[node name="Desk" type="MeshInstance3D" parent="scene/lovecraft_proxy" unique_id=472346976]
-material_override = ExtResource("2_blockout_mat")
-mesh = SubResource("ArrayMesh_dnss7")
-skeleton = NodePath("")
+[node name="Desk" type="Node3D" parent="scene/lovecraft_proxy" unique_id=472346976]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="scene/lovecraft_proxy/Desk" unique_id=1929781448]
-collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="scene/lovecraft_proxy/Desk/StaticBody3D" unique_id=293647239]
-shape = SubResource("ConcavePolygonShape3D_hkilw")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.541328, 2, -5.6635)
+shape = SubResource("BoxShape3D_desk")
 
 [node name="Floor" type="MeshInstance3D" parent="scene/lovecraft_proxy" unique_id=1619548963]
 material_override = ExtResource("2_blockout_mat")
@@ -347,7 +314,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08, 0, -5.32)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("6_interact_script")
-prompt_text = "[E] Inspect Case Notes"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="scene/DeskInteractionArea" unique_id=987919237]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -376,6 +342,7 @@ light_color = Color(1, 0.85, 0.6, 1)
 light_energy = 2.0
 shadow_enabled = true
 shadow_bias = 0.05
+shadow_blur = 1.8
 omni_range = 20.0
 omni_attenuation = 0.9
 
@@ -386,11 +353,12 @@ light_color = Color(0.9, 0.92, 0.95, 1)
 light_energy = 0.8
 shadow_enabled = true
 shadow_bias = 0.04
+shadow_blur = 1.8
 directional_shadow_max_distance = 35.0
 
-[node name="PostProcessing" type="CanvasLayer" parent="."]
+[node name="PostProcessing" type="CanvasLayer" parent="." unique_id=364506843]
 
-[node name="OilPaintingEffect" type="ColorRect" parent="PostProcessing"]
+[node name="OilPaintingEffect" type="ColorRect" parent="PostProcessing" unique_id=236264667]
 material = ExtResource("9_oil_mat")
 anchors_preset = 15
 anchor_right = 1.0
@@ -402,14 +370,14 @@ mouse_filter = 2
 [node name="HUD" type="CanvasLayer" parent="." unique_id=634084763]
 layer = 2
 
-[node name="InteractionPrompt" type="PanelContainer" parent="HUD"]
+[node name="InteractionPrompt" type="PanelContainer" parent="HUD" unique_id=184441939]
 visible = false
 offset_right = 230.0
 offset_bottom = 36.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pill")
 
-[node name="Label" type="Label" parent="HUD/InteractionPrompt"]
+[node name="Label" type="Label" parent="HUD/InteractionPrompt" unique_id=2131114340]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)

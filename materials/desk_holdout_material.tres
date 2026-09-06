@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c8f34weiprr3y"]
+
+[ext_resource type="Shader" uid="uid://gpc1khwmri8d" path="res://shaders/desk_holdout.gdshader" id="1_shader"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_shader")

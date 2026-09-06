@@ -16,6 +16,9 @@ func _setup_proxies() -> void:
 			child.queue_free()
 			continue
 
+		if child.name == "Desk":
+			continue
+
 		if child is MeshInstance3D:
 			if material:
 				child.material_override = material
