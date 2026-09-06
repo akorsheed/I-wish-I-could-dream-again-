@@ -14,6 +14,9 @@ const GRAVES_SCENE = preload("res://player/graves_character.tscn")
 var can_move: bool = true
 
 func _ready() -> void:
+	floor_max_angle = 0.785398
+	floor_snap_length = 0.2
+	floor_block_on_wall = true
 	if not visuals.has_node("graves_character"):
 		var model = GRAVES_SCENE.instantiate()
 		visuals.add_child(model)

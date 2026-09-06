@@ -5,6 +5,7 @@ signal interacted
 @export var prompt_text: String = "[E] Inspect Case Notes"
 ## 3D height offset above the interaction area origin where the 2D floating HUD pill anchors
 @export var prompt_offset_3d: Vector3 = Vector3(0.0, 1.8, 0.0)
+@export var is_active: bool = true
 
 var player_in_range: bool = false
 var _camera: Camera3D
@@ -29,12 +30,17 @@ func _resolve_prompt_ui() -> void:
 			_prompt_label = _prompt_ui.find_child("Label", true, false) as Label
 			_prompt_ui.visible = false
 
-func _process(_delta: float) -> void:
-	if not player_in_range:
+func _unhandled_input(event: InputEvent) -> void:
+	if not player_in_range or not is_active:
 		return
 
-	if Input.is_action_just_pressed("interact") or Input.is_physical_key_pressed(KEY_E):
+	if (event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_E) or event.is_action_pressed("interact"):
+		get_viewport().set_input_as_handled()
 		interacted.emit()
+
+func _process(_delta: float) -> void:
+	if not player_in_range or not is_active:
+		return
 
 	# Position the 2D HUD pill right above the 3D desk/interaction object in screen space
 	if _prompt_ui and _prompt_ui.visible:
@@ -48,6 +54,8 @@ func _update_prompt_position() -> void:
 		_prompt_ui.global_position = screen_pos - (_prompt_ui.size * 0.5)
 
 func _on_body_entered(body: Node3D) -> void:
+	if not is_active:
+		return
 	if body.name == "Player" or body is CharacterBody3D:
 		player_in_range = true
 		_resolve_prompt_ui()
@@ -60,5 +68,14 @@ func _on_body_entered(body: Node3D) -> void:
 func _on_body_exited(body: Node3D) -> void:
 	if body.name == "Player" or body is CharacterBody3D:
 		player_in_range = false
-		if _prompt_ui:
+		if _prompt_ui and _prompt_label and _prompt_label.text == prompt_text:
 			_prompt_ui.visible = false
+
+func hide_prompt() -> void:
+	if _prompt_ui and _prompt_label and _prompt_label.text == prompt_text:
+		_prompt_ui.visible = false
+
+func set_prompt_text(text: String) -> void:
+	prompt_text = text
+	if player_in_range and _prompt_label and _prompt_ui and _prompt_ui.visible:
+		_prompt_label.text = prompt_text

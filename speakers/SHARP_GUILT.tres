@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Speaker" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://dialogue_system/speaker.gd" id="1_speaker"]
+
+[resource]
+script = ExtResource("1_speaker")
+speaker_name = "Sharp Guilt"
+speaker_color = Color(0.85098, 0.25098, 0.29804, 1)
+metadata/_custom_type_script = "uid://booxiry4lf2es"

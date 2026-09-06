@@ -31,8 +31,20 @@ func _load_file(path) -> Dictionary:
 
 
 func _load_clyde_file(path) -> Dictionary:
+	if FileAccess.file_exists(path):
+		var file := FileAccess.open(path, FileAccess.READ)
+		if file:
+			var clyde_text := file.get_as_text()
+			var parser = preload("res://addons/clyde/parser/Parser.gd").new()
+			var parsed = parser.parse(clyde_text)
+			if parsed is Dictionary and not parsed.is_empty():
+				return parsed
+
 	var data = load(path)
-	return data.content
+	if data != null and "content" in data:
+		return data.content
+
+	return {}
 
 
 func get_file_path(file_name: String) -> String:

@@ -17,8 +17,12 @@ func _setup_proxies() -> void:
 			continue
 
 		if child is MeshInstance3D:
-			if material:
+			if child.name == "Desk" or child.name.begins_with("Desk"):
+				child.material_override = preload("res://materials/desk_holdout_material.tres")
+				child.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			elif material:
 				child.material_override = material
+
 			for sub in child.get_children():
 				if sub is StaticBody3D:
 					sub.collision_layer = 1

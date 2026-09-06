@@ -44,8 +44,9 @@ void fragment() {
 		base *= texture(albedo_texture, UV);
 	}
 	ALBEDO = base.rgb;
-	ROUGHNESS = 0.95;
-	SPECULAR = 0.0;
+	ROUGHNESS = 0.85;
+	METALLIC = 0.0;
+	SPECULAR = 0.15;
 }
 
 void light() {
@@ -84,6 +85,6 @@ void light() {
 		lit_color = mix(ALBEDO, highlight_color.rgb, (stepped - 0.5) * 2.0);
 	}
 	
-	// Accumulate diffuse light with ambient floor term
-	DIFFUSE_LIGHT += ALBEDO * max(stepped * LIGHT_COLOR * ATTENUATION, vec3(0.25));
+	// Accumulate diffuse light with shadow attenuation
+	DIFFUSE_LIGHT += (lit_color + grain) * LIGHT_COLOR * stepped * ATTENUATION;
 }

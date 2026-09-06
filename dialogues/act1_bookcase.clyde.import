@@ -1,0 +1,14 @@
+[remap]
+
+importer="clyde.dialogue"
+type="ClydeDialogueFile"
+uid="uid://ces1vhycgogjd"
+path="res://.godot/imported/act1_bookcase.clyde-2b7664e0f95beb23fe2662dce0c08211.res"
+
+[deps]
+
+source_file="res://dialogues/act1_bookcase.clyde"
+dest_files=["res://.godot/imported/act1_bookcase.clyde-2b7664e0f95beb23fe2662dce0c08211.res"]
+
+[params]
+
