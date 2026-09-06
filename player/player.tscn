@@ -1,39 +1,12 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_script"]
-[ext_resource type="Material" path="res://materials/character_material.tres" id="2_material"]
+[ext_resource type="PackedScene" path="res://player/graves_character.tscn" id="2_graves"]
+[ext_resource type="Material" path="res://materials/graves_hair_material.tres" id="3_hair_mat"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
-radius = 0.35
-height = 1.8
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_coat"]
-material = ExtResource("2_material")
-radius = 0.32
-height = 1.6
-radial_segments = 16
-rings = 4
-
-[sub_resource type="SphereMesh" id="SphereMesh_head"]
-material = ExtResource("2_material")
-radius = 0.22
-height = 0.44
-radial_segments = 16
-rings = 8
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_hat_brim"]
-material = ExtResource("2_material")
-top_radius = 0.4
-bottom_radius = 0.4
-height = 0.04
-radial_segments = 16
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_hat_crown"]
-material = ExtResource("2_material")
-top_radius = 0.2
-bottom_radius = 0.22
-height = 0.2
-radial_segments = 16
+radius = 0.7
+height = 4.7
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -41,23 +14,19 @@ collision_mask = 1
 script = ExtResource("1_script")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35, 0)
 shape = SubResource("CapsuleShape3D_player")
 
 [node name="Visuals" type="Node3D" parent="."]
+transform = Transform3D(2.7, 0, 0, 0, 2.7, 0, 0, 0, 2.7, 0, 0, 0)
 
-[node name="Coat" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-mesh = SubResource("CapsuleMesh_coat")
+[node name="graves_character" parent="Visuals" instance=ExtResource("2_graves")]
 
-[node name="Head" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62, 0)
-mesh = SubResource("SphereMesh_head")
+[node name="head_necro_hair_LOD0_001" parent="Visuals/graves_character/Graves_Rig/Skeleton3D" index="1"]
+surface_material_override/0 = ExtResource("3_hair_mat")
 
-[node name="HatBrim" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78, 0)
-mesh = SubResource("CylinderMesh_hat_brim")
+[node name="head_necro_head_LOD0" parent="Visuals/graves_character/Graves_Rig/Skeleton3D" index="2"]
+surface_material_override/1 = ExtResource("3_hair_mat")
 
-[node name="HatCrown" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88, 0)
-mesh = SubResource("CylinderMesh_hat_crown")
+[node name="necro_necro_hair_LOD0" parent="Visuals/graves_character/Graves_Rig/Skeleton3D" index="3"]
+surface_material_override/0 = ExtResource("3_hair_mat")

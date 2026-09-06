@@ -2,7 +2,9 @@ shader_type spatial;
 render_mode diffuse_lambert, depth_draw_opaque, cull_back;
 
 // Stylized painterly palette
-uniform vec4 albedo_color : source_color = vec4(0.9, 0.85, 0.8, 1.0); // Clear bright baseline tone
+uniform vec4 albedo_color : source_color = vec4(1.0, 1.0, 1.0, 1.0); // Clear bright baseline tone
+uniform sampler2D albedo_texture : source_color, filter_linear_mipmap, repeat_enable;
+uniform bool use_albedo_texture = false;
 uniform vec4 shadow_color : source_color = vec4(0.2, 0.22, 0.28, 1.0); // Moody cool shadow
 uniform vec4 highlight_color : source_color = vec4(1.0, 0.96, 0.88, 1.0); // Warm painterly highlight
 
@@ -37,7 +39,11 @@ float screen_noise(vec2 uv) {
 }
 
 void fragment() {
-	ALBEDO = albedo_color.rgb;
+	vec4 base = albedo_color;
+	if (use_albedo_texture) {
+		base *= texture(albedo_texture, UV);
+	}
+	ALBEDO = base.rgb;
 	ROUGHNESS = 0.95;
 	SPECULAR = 0.0;
 }
