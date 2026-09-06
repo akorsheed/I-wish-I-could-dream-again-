@@ -2,5 +2,5 @@ extends RefCounted
 
 var last_check_result: CheckResult
 
-func process_active_check(skill: String, level: int):
-	last_check_result = CheckResult.new(randf() > 0.5, CheckResult.Difficulty.EASY)
+func process_active_check(_skill: String, _level: int) -> void:
+	last_check_result = CheckResult.new(true, CheckResult.Difficulty.EASY)

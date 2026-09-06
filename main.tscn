@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" path="res://player/player.tscn" id="5_player"]
 [ext_resource type="Script" uid="uid://bxgrs5ixfewg6" path="res://interactables/interaction_area.gd" id="6_interact_script"]
 [ext_resource type="PackedScene" uid="uid://ltwhxc6oap2c" path="res://dialogue_system/dialogue_drawer.tscn" id="7_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://qtxb7q4nkvo5" path="res://checks/active_check_animation.tscn" id="8_h2yge"]
 [ext_resource type="Material" path="res://materials/oil_painting_material.tres" id="9_oil_mat"]
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pill"]
 content_margin_left = 16.0
@@ -250,9 +249,6 @@ size = Vector3(0.4, 4, 12.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_desk_interact"]
 size = Vector3(3.5, 2, 3.5)
 
-[sub_resource type="Theme" id="Theme_h2yge"]
-default_font_size = 32
-
 [node name="main" type="Node3D" unique_id=2135480255]
 script = ExtResource("1_0xm2m")
 
@@ -426,66 +422,6 @@ vertical_alignment = 1
 [node name="DialogueDrawer" parent="HUD" unique_id=1143988104 instance=ExtResource("7_ig7tw")]
 offset_left = -630.0
 
-[node name="DialogueList" type="MarginContainer" parent="HUD" unique_id=476635183]
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
-theme = SubResource("Theme_h2yge")
-theme_override_constants/margin_left = 80
-theme_override_constants/margin_top = 80
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/DialogueList" unique_id=1412419119]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="HUD/DialogueList/VBoxContainer" unique_id=745349536]
-layout_mode = 2
-theme_override_constants/margin_bottom = 10
-
-[node name="Label" type="Label" parent="HUD/DialogueList/VBoxContainer/MarginContainer" unique_id=265087311]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Dialogues"
-
-[node name="intro_dialogue" type="Button" parent="HUD/DialogueList/VBoxContainer" unique_id=288937080]
-layout_mode = 2
-focus_mode = 0
-text = "Intro"
-
-[node name="passive_dialogue" type="Button" parent="HUD/DialogueList/VBoxContainer" unique_id=1598534118]
-layout_mode = 2
-focus_mode = 0
-text = "Passive Check"
-
-[node name="active_dialogue" type="Button" parent="HUD/DialogueList/VBoxContainer" unique_id=1011503901]
-layout_mode = 2
-focus_mode = 0
-text = "Active Check"
-
-[node name="test_dialogue_button" type="Button" parent="HUD/DialogueList/VBoxContainer" unique_id=1023321187]
-layout_mode = 2
-focus_mode = 0
-text = "Test"
-
-[node name="variables_dialogue_button" type="Button" parent="HUD/DialogueList/VBoxContainer" unique_id=638213012]
-layout_mode = 2
-focus_mode = 0
-text = "Variables"
-
-[node name="ActiveCheckAnimation" parent="HUD" unique_id=1458633654 instance=ExtResource("8_h2yge")]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=695609629]
 anchors_preset = 2
 anchor_top = 1.0
@@ -508,12 +444,5 @@ theme_override_font_sizes/font_size = 48
 text = "Restart scene"
 
 [connection signal="interacted" from="scene/DeskInteractionArea" to="." method="_on_desk_interacted"]
-[connection signal="active_check_ended" from="HUD/DialogueDrawer" to="." method="_on_dialogue_drawer_active_check_ended"]
-[connection signal="active_check_started" from="HUD/DialogueDrawer" to="." method="_on_dialogue_drawer_active_check_started"]
 [connection signal="dialogue_ended" from="HUD/DialogueDrawer" to="." method="_on_dialogue_drawer_dialogue_ended"]
-[connection signal="pressed" from="HUD/DialogueList/VBoxContainer/intro_dialogue" to="." method="_on_intro_dialogue_pressed"]
-[connection signal="pressed" from="HUD/DialogueList/VBoxContainer/passive_dialogue" to="." method="_on_passive_dialogue_pressed"]
-[connection signal="pressed" from="HUD/DialogueList/VBoxContainer/active_dialogue" to="." method="_on_active_dialogue_pressed"]
-[connection signal="pressed" from="HUD/DialogueList/VBoxContainer/test_dialogue_button" to="." method="_on_test_dialogue_button_pressed"]
-[connection signal="pressed" from="HUD/DialogueList/VBoxContainer/variables_dialogue_button" to="." method="_on_variables_dialogue_button_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/restart_scene_button" to="." method="_on_restart_scene_button_pressed"]
